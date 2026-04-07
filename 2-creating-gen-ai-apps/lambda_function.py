@@ -4,7 +4,7 @@ import sqlite3
 from datetime import datetime
 
 def get_available_vacations_days(employee_id):
-    
+
     conn = sqlite3.connect('employee_database.db')
     c = conn.cursor()
 
@@ -31,10 +31,10 @@ def get_available_vacations_days(employee_id):
 def lambda_handler(event, context):
     try:
         print(f"Received event: {json.dumps(event)}")
-        
+
         # Bedrock Agent passa parâmetros em diferentes formatos
         employee_id = None
-        
+
         # Tentar diferentes formatos de entrada
         if 'employee_id' in event:
             employee_id = event['employee_id']
@@ -43,12 +43,12 @@ def lambda_handler(event, context):
                 if param['name'] == 'employee_id':
                     employee_id = param['value']
                     break
-        
+
         if not employee_id:
             raise ValueError("employee_id parameter is required")
-        
+
         available_days = get_available_vacations_days(employee_id)
-        
+
         # Formato de resposta para Bedrock Agent
         response = {
             'response': {
@@ -66,13 +66,13 @@ def lambda_handler(event, context):
                 }
             }
         }
-        
+
         print(f"Returning response: {json.dumps(response)}")
         return response
-        
+
     except Exception as e:
         print(f"Error: {str(e)}")
-        
+
         # Formato de erro para Bedrock Agent
         error_response = {
             'response': {
@@ -89,5 +89,5 @@ def lambda_handler(event, context):
                 }
             }
         }
-        
+
         return error_response

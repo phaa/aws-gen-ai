@@ -142,3 +142,7 @@ Shows video creation from text descriptions using Amazon Nova Reel. Covers async
 ## Note
 
 This repository represents practical learning outcomes from the AWS Coursera course on generative AI applications. The implementations follow AWS best practices and include detailed explanations for educational reference.
+
+
+
+create s3 bucket com o dataset
